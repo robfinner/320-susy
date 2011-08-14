@@ -1,0 +1,88 @@
+// 1382 Grid -----------------------------------------------------------------
+
+$total-cols: 24;
+$col-width: 2em;
+$gutter-width: 1em;
+$side-gutter-width: $gutter-width;
+
+/* Root -------------------------------------------------------------------- */
+
+body {
+  > div {
+    @include container;
+    @include susy-grid-background; } }
+
+/* Layout ------------------------------------------------------------------ */
+
+header[role="banner"] {
+  @include columns(4);
+  @include prefix(2);
+  @include alpha;
+  border: 0;
+  h1 {
+    @include transform(rotate(7deg) scale(1.3)); } }
+
+div[role="main"] {
+  @include un-column;
+  @include full;
+  @include pie-clearfix;
+  @include leading-border($base-line-height * 4, 5);
+  border-top-color: rgba($base-dark, 0.125);
+  font: inherit;
+  clear: none;
+  margin: {
+    left: columns(6) + side-gutter() + gutter();
+    right: columns(4) + side-gutter() + gutter(); };
+  p {
+    @include trailer; }
+  article {
+    @include padding-leader; }
+  div {
+    @include un-column;
+    @include full(14);
+    @include pie-clearfix;
+    @include trailing-border(6px, 0.5);
+    @include trailer(0.5);
+    text-align: left;
+    &::before {
+      display: none; }
+    p {
+      @include columns(6, 14);
+      min-height: 0;
+      &:last-child {
+        @include omega(14);
+        position: relative;
+        &::before {
+          @include adjust-font-size-to(132px, 2.5);
+          display: block;
+          position: absolute;
+          top: 0;
+          left: -(columns(2, 6)) - gutter(6);
+          content: "+";
+          font-weight: bold;
+          text-align: center; } } }
+    + p {
+      @include un-column;
+      @include full(14);
+      @include padding-trailer(2);
+      margin: {
+        top: 0;
+        bottom: 0; }; } } }
+
+footer[role="contentinfo"] {
+  padding: 0;
+  .author {
+    @include container;
+    @include susy-grid-background;
+    @include padding-trailer; }
+  p {
+    @include full;
+    margin: {
+      left: columns(6) + side-gutter() + gutter();
+      right: columns(4) + side-gutter() + gutter(); };
+    text-align: right;
+    &:first-child {
+      @include leading-border($base-line-height * 4, 5, 14px);
+      border-color: rgba($base-dark, 0.125); }
+    &:last-child {
+      @include padding-trailer(1, 14px); } } }
