@@ -1,0 +1,39 @@
+// 480 Grid ------------------------------------------------------------------
+
+$total-cols: 4;
+$col-width: 4em;
+$gutter-width: 1em;
+$side-gutter-width: 1em;
+
+/* Root -------------------------------------------------------------------- */
+
+body {
+  > div {
+    @include container;
+    @include susy-grid-background; } }
+
+/* Layout ------------------------------------------------------------------ */
+
+header[role="banner"] {
+  @include columns(1);
+  @include alpha;
+  h1 {
+    @include adjust-font-size-to(16px);
+    @include leader(0.25, 16px);
+    &::before {
+      @include adjust-font-size-to(16px, 1, 36px); }
+    &::before {
+      @include adjust-font-size-to(60px, 1.5, 16px); } } }
+
+div[role="main"] {
+  @include columns(3);
+  @include omega;
+  @include hpadding(0); }
+
+footer[role="contentinfo"] {
+  @include hpadding(0);
+  .author {
+    @include container; }
+  p {
+    @include full;
+    @include prefix(1); } }

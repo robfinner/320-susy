@@ -1,0 +1,268 @@
+// Imports -------------------------------------------------------------------
+
+@import "base";
+@import "compass/reset";
+
+/* Typography ---------------------------------------------------------------- */
+
+.serif {
+  @include serif-family; }
+
+.sans {
+  @include sans-family; }
+
+.mono {
+  @include monospace-family; }
+
+.caps {
+  letter-spacing: 0.1em; }
+
+.allcaps {
+  @extend .caps;
+  text-transform: uppercase; }
+
+.smallcaps {
+  @extend .caps;
+  font-variant: small-caps; }
+
+/* Root ---------------------------------------------------------------------- */
+
+@include establish-baseline;
+
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%; }
+
+$on: rgba($base-dark, 0.1);
+$off: rgba($base-dark, 0);
+
+body {
+  @extend .serif;
+  @include background-image(linear-gradient(top left, $on, $on 100% / 14, $off 100% / 14, $off 100% / 7 * 3, $on 100% / 7 * 3, $on 100% / 7 * 4, $off 100% / 7 * 4, $off 100% / 14 * 13, $on 100% / 14 * 13, $on 100%));
+  @include background-size(0.25em 0.25em);
+  @include text-shadow($dark 0 1px 0);
+  @include baseline-grid-background;
+  background-color: $base;
+  color: $light; }
+
+/* Selected Text ------------------------------------------------------------- */
+
+@mixin selection($color: $alt) {
+  color: contrast-color($color);
+  background: $color;
+  text-shadow: none; }
+
+@mixin apply-selection($color: $alt) {
+  ::-webkit-selection {
+    @include selection($color); }
+  ::-moz-selection {
+    @include selection($color); }
+  ::selection {
+    @include selection($color); } }
+
+@include apply-selection(white);
+
+/* Links --------------------------------------------------------------------- */
+
+$link: "&:link, &:visited";
+$focus: "&:focus, &:hover, &:active";
+
+@mixin focus-default {
+  outline: thin dotted $accent; }
+
+@mixin no-style-link {
+  &:link, &:visited, &:focus, &:hover, &:active {
+    color: inherit; } }
+
+a {
+  &:hover, &:active {
+    outline: none; }
+  #{$link} {
+    color: $alt;
+    text-decoration: none;
+    font-weight: bold; }
+  #{$focus} {
+    color: $accent; } }
+
+/* Headings ------------------------------------------------------------------ */
+
+h2, h3, h4, h5, h6 {
+  @include trailer; }
+
+h1 {
+  @include adjust-font-size-to(36px);
+  @include trailer(1, 36px);
+  @include transition(all, 500ms);
+  position: relative;
+  text-align: center;
+  font-weight: bold;
+  z-index: 10;
+  &::before {
+    @include opacity(0.5);
+    @include adjust-font-size-to(108px, 3, 36px);
+    content: "›S‹";
+    display: block; } }
+
+h2 {
+  @extend .allcaps; }
+
+h3 {
+  font-weight: bold; }
+
+h4 {
+  @extend .smallcaps;
+  text-transform: lowercase; }
+
+h5, h6 {
+  font-style: italic; }
+
+/* Inline -------------------------------------------------------------------- */
+
+cite, em, dfn, address, i {
+  font-style: italic; }
+
+strong, dfn, b {
+  font-weight: bold; }
+
+sup, sub {
+  position: relative;
+  font-size: smaller;
+  line-height: 0; }
+
+sup {
+  top: -0.5em; }
+
+sub {
+  bottom: -0.25em; }
+
+abbr, acronym {
+  border-bottom: 1px dotted;
+  cursor: help; }
+
+ins {
+  text-decoration: underline; }
+
+del {
+  text-decoration: line-through; }
+
+mark {
+  background: #ffff99;
+  background-color: rgba(yellow, 0.5);
+  text-shadow: none; }
+
+small {
+  @include adjust-font-size-to(12px); }
+
+q {
+  font-style: italic;
+  em {
+    font-style: normal; } }
+
+pre, code, tt {
+  @extend .mono; }
+
+/* Block --------------------------------------------------------------------- */
+
+p {
+  @include trailer; }
+
+pre {
+  padding: rhythm();
+  white-space: pre;
+  white-space: pre-wrap;
+  white-space: pre-line;
+  word-wrap: break-word; }
+
+blockquote {
+  padding: rhythm();
+  font-style: italic; }
+
+/* Replaced ------------------------------------------------------------------ */
+
+figure {
+  img, object, embed {
+    vertical-align: top;
+    max-width: 100%; } }
+
+.ie7 {
+  img {
+    -ms-interpolation-mode: bicubic; } }
+
+/* Lists --------------------------------------------------------------------- */
+
+@mixin no-style-list {
+  @include reset-box-model;
+  @include no-bullets; }
+
+ol, ul {
+  margin-left: rhythm(); }
+
+ol {
+  list-style-type: decimal; }
+
+ul {
+  list-style-type: disc; }
+
+dt {
+  @include leader;
+  font-style: italic; }
+
+dd {
+  margin-left: rhythm(); }
+
+nav {
+  ul {
+    @include no-style-list; } }
+
+/* Tables -------------------------------------------------------------------- */
+
+table {
+  @include trailer;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0; }
+
+table, td, th {
+  vertical-align: top; }
+
+th, thead th {
+  font-weight: bold; }
+
+th, td, caption {
+  padding: rhythm(0.5);
+  text-align: left;
+  font-weight: normal; }
+
+table, th {
+  @include trailing-border(1px, 0.5); }
+
+tfoot {
+  @include adjust-font-size-to(14px); }
+
+caption {
+  @extend .allcaps; }
+
+// Forms ---------------------------------------------------------------------
+
+//@import modules/forms
+
+/* Layout -------------------------------------------------------------------- */
+
+body {
+  > div {
+    @include padding-leader; } }
+
+div[role="main"] {
+  padding: 0 rhythm(0.5); }
+
+footer[role="contentinfo"] {
+  @include padding-leader(0.5);
+  @include padding-trailer(0.5);
+  @include hpadding(rhythm(0.5));
+  font-style: italic;
+  background: rgba($base-dark, 0.125);
+  p {
+    @include adjust-font-size-to(14px);
+    margin: 0; } }

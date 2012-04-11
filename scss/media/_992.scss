@@ -1,0 +1,36 @@
+// 992 Grid ------------------------------------------------------------------
+
+$total-cols: 12;
+$col-width: 3em;
+$gutter-width: 1em;
+$side-gutter-width: $gutter-width;
+
+/* Root -------------------------------------------------------------------- */
+
+body {
+  > div {
+    @include container;
+    @include susy-grid-background; } }
+
+/* Layout ------------------------------------------------------------------ */
+
+div[role="main"] {
+  font: inherit;
+  p {
+    @include trailer(1); }
+  div {
+    p {
+      min-height: rhythm(3); }
+    &::before {
+      @include adjust-font-size-to(24px, 1, 252px); }
+    &::before {
+      @include adjust-font-size-to(504px, 4);
+      content: "›";
+      text-indent: -0.05em; }
+    + p {
+      @include leader(2); } } }
+
+footer[role="contentinfo"] {
+  .author {
+    @include container;
+    @include susy-grid-background; } }
