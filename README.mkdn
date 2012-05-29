@@ -1,5 +1,11 @@
-320+Susy
-========
+**WARNING**: This is old. You are much better off with [Susy 1.0][susy]. 
+I recommend the mobile-first approach, but I don't recommend the pre-defined media breakpoints.
+Roll your own meaningful breakpoints with the [new Susy][susy] in seconds.
+
+[susy]: https://github.com/ericam/320-susy/
+
+# 320+Susy
+
 
 [320 and up](http://stuffandnonsense.co.uk/projects/320andup/) is a 'tiny screen first' boilerplate extension by Andy Clarke.
 
@@ -7,7 +13,6 @@
 
 This is an example of how one might use them together, to build different grids for different devices on one site.
 
-Notes:
--------
+## Notes:
 
 * There is more code here than is needed. I left most of my default boilerplate styles in place. That could be optimized more, if I cared.
