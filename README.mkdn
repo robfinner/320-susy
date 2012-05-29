@@ -2,7 +2,7 @@
 I recommend the mobile-first approach, but I don't recommend the pre-defined media breakpoints.
 Roll your own meaningful breakpoints with the [new Susy][susy] in seconds.
 
-[susy]: https://github.com/ericam/320-susy/
+[susy]: https://github.com/ericam/susy/
 
 # 320+Susy
 
